@@ -2,6 +2,17 @@ const path = require('path');
 const express = require('express');
 const cookieSession = require('cookie-session');
 const app = express();
+const firebase = require('firebase');
+
+const config = {
+    apiKey: "AIzaSyD89rQLSFUnanXZBH-hZPYboEURX-2_6xY",
+    authDomain: "websocketchat-e51b2.firebaseapp.com",
+    databaseURL: "https://websocketchat-e51b2.firebaseio.com/",
+    storageBucket: "bucket.appspot.com"
+};
+firebase.initializeApp(config);
+
+const database = firebase.database();
 
 // settings
 app.set('port', process.env.PORT || 3000);
@@ -40,6 +51,6 @@ io.on('connection', (socket)=>{
 
     socket.on('chat:typing', (data)=>{
         socket.broadcast.emit('chat:typing', data);
-    })
+    });
 });
 

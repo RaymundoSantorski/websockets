@@ -1,13 +1,16 @@
 {
   "name": "nodesocketpro",
   "version": "1.0.0",
-  "description": "",
+  "description": "Una app de chat",
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js"
   },
-  "keywords": ["websockets","chat"],
+  "keywords": [
+    "websockets",
+    "chat"
+  ],
   "author": "Raymundo Mateos",
   "license": "ISC",
   "dependencies": {
@@ -16,6 +19,7 @@
     "ejs": "^3.1.5",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
+    "firebase": "^8.0.0",
     "morgan": "^1.10.0",
     "node-fetch": "^2.6.1",
     "socket.io": "^2.3.0"
@@ -26,5 +30,4 @@
   "engines": {
     "node": "10.19.0"
   }
-
 }
