@@ -21,7 +21,7 @@ message.addEventListener('keypress', function(){
 socket.on('chat:message', function(data){
     actions.innerHTML = '';
     output.innerHTML += `<p>
-    <strong>${username}</strong>: ${data.message}
+    <strong>${data.username}</strong>: ${data.message}
     </p>`
 });
 

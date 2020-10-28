@@ -7,8 +7,8 @@
     "start": "node src/index.js",
     "dev": "nodemon src/index.js"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["websockets","chat"],
+  "author": "Raymundo Mateos",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -22,5 +22,9 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.6"
+  },
+  "engines": {
+    "node": "10.19.0"
   }
+
 }
