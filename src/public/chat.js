@@ -7,7 +7,7 @@ let actions = document.getElementById('actions');
 
 btn.addEventListener('click', ()=>{
     const mensaje = message.value;
-    message.valuegit  = '';
+    message.value = '';
     socket.emit('chat:message', {
         message: mensaje,
         username: username
