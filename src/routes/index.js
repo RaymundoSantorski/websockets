@@ -2,7 +2,7 @@ const express = require('express');
 const cookieSession = require('cookie-session');
 const router = express.Router();
 const body_parser = require('body-parser');
-const firebase = require('firebase/app');
+const admin = require('firebase-admin');
 
 router.use(body_parser.urlencoded({extended:true}));
 
@@ -17,13 +17,17 @@ router.get('/', (req, res)=>{
     if(req.session.username){
         res.render('index', {username: req.session.username});
     }else{
-        res.render('login');
+        res.redirect('login');
     }
 });
 
 router.get('/logout', (req, res)=>{
     req.session.username = null;
     res.redirect('/');
+});
+
+router.get('/login', (req, res)=>{
+    res.render('login');
 });
 
 router.post('/login', (req, res)=>{
@@ -40,7 +44,8 @@ router.get('/signup', (req, res)=>{
 router.post('/signup', (req, res)=>{
     username = req.body.username;
     password = req.body.password;
-    console.log(username, password);
+    email = req.body.email;
+    console.log(username, password, email);
     req.session.username = username;
     res.redirect('/');
 });
