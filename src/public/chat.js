@@ -18,6 +18,10 @@ message.addEventListener('keypress', function(){
     socket.emit('chat:typing', username);
 });
 
+socket.on('connect', function(){
+    socket.emit('logged', username)
+});
+
 socket.on('chat:message', function(data){
     actions.innerHTML = '';
     output.innerHTML += `<p>

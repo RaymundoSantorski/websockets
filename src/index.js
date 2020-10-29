@@ -1,4 +1,5 @@
 const app = require('./app');
+let usersOn = {};
 
 // start the server
 const server = app.listen(app.get('port'), ()=>{
@@ -18,6 +19,11 @@ io.on('connection', (socket)=>{
 
     socket.on('chat:typing', (data)=>{
         socket.broadcast.emit('chat:typing', data);
+    });
+
+    socket.on('logged', (username)=>{
+        usersOn[username] = socket.id;
+        console.log(usersOn);
     });
 });
 

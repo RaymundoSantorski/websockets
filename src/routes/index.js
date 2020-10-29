@@ -2,7 +2,15 @@ const express = require('express');
 const cookieSession = require('cookie-session');
 const router = express.Router();
 const body_parser = require('body-parser');
+
+//firebase
 const admin = require('firebase-admin');
+var serviceAccount = require('/home/raymundo/nodepro/nodesocketpro/websocketchat-e51b2-firebase-adminsdk-sznst-807325dfdb.json');
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: 'https://websocketchat-e51b2.firebaseio.com/'
+});
+const db = admin.database();
 
 router.use(body_parser.urlencoded({extended:true}));
 
@@ -41,13 +49,16 @@ router.get('/signup', (req, res)=>{
     res.render('signup');
 });
 
-router.post('/signup', (req, res)=>{
-    username = req.body.username;
-    password = req.body.password;
-    email = req.body.email;
-    console.log(username, password, email);
-    req.session.username = username;
-    res.redirect('/');
+router.post('/signup', async (req, res)=>{
+    const newUser = {
+        username: req.body.username,
+        password: req.body.password,
+        phone: req.body.phone,
+        email: req.body.email
+    }
+    await db.ref('users').push(newUser);
+    req.session.username = newUser['username'];
+    res.redirect('/',{newUser});
 });
 
 module.exports = router;
