@@ -41,16 +41,25 @@ router.get('/login', (req, res)=>{
 router.post('/login', (req, res)=>{
     const username = req.body.username;
     const password = req.body.password;
+    var user = false;
     db.ref('users').once('value', (snapshot)=>{
         const data = snapshot.val();
         for(key in data){
-            if(data[key]['username']==username & data[key]['password']==password){
-                req.session.username = username;
-                res.redirect('/');
+            if(data[key]['username']==username){
+                if(data[key]['password']==password){
+                    user = true;
+                }
             }
         }
     });
-    res.redirect('/');
+    if(user){
+        console.log({password: password, username: username});
+        req.session.username = username;
+        res.redirect('/');
+    }else{
+        console.log('No');
+        res.redirect('/');
+    }
 });
 
 router.get('/signup', (req, res)=>{
